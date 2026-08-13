@@ -1,0 +1,191 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --grid: #16213a;
+  --snake-head: #22c55e;
+  --snake-body: #4ade80;
+  --food: #f43f5e;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 50% -10%, #1e293b 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  min-height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  gap: 14px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 28px);
+  letter-spacing: 2px;
+}
+
+.scoreboard {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.score-card {
+  flex: 1;
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.score-card .label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.score-card .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+  background: var(--grid);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: block;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.78);
+  border-radius: 14px;
+  text-align: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.overlay h2 {
+  margin: 0;
+  font-size: clamp(22px, 6vw, 30px);
+}
+
+.overlay p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #06281a;
+  background: var(--snake-head);
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(2, 64px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.controls button {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  font-size: 22px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.controls .up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.controls .left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.controls .down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.controls .right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* 仅在触屏设备上显示方向按钮 */
+@media (hover: hover) and (pointer: fine) {
+  .controls {
+    display: none;
+  }
+}
